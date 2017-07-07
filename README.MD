@@ -9,3 +9,5 @@
 # 使用方法
 现在只支持在代码中使用，具体使用方法见类：
 com.liyuncong.learn.visualstanfordcorenlpgrammartree.Main
+示例句子的显示结果已经存储为文件：
+com.liyuncong.learn.visualstanfordcorenlpgrammartree.grammar_tree.jpg
