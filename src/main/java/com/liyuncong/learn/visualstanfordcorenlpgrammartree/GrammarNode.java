@@ -3,6 +3,11 @@ package com.liyuncong.learn.visualstanfordcorenlpgrammartree;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * 语法节点
+ * @author liyuncong
+ *
+ */
 public class GrammarNode {
 	private String text;
 	private List<GrammarNode> children = new LinkedList<>();
@@ -24,8 +29,9 @@ public class GrammarNode {
 	}
 	/**
 	 * 
-	 * @param StanfordTreeString 
-	 * @return
+	 * @param StanfordTreeString 从stanford-corenlp的Tree的toString方法得到，如：
+	 * <br> (ROOT (PP (P 由于) (IP (NP (CP (IP (NP (PN 我们)) (VP (MSP 所) (VP (VV 站)))) (DEC 的)) (NP (NN 立场))) (VP (VA 不同))))) 
+	 * @return 对应的语法树
 	 */
 	public static GrammarNode parseStanfordTreeString(String stanfordTreeString) {
 		int end = stanfordTreeString.indexOf('(', 1);
