@@ -1,7 +1,5 @@
 package com.liyuncong.learn.visualstanfordcorenlpgrammartree;
 
-import com.liyuncong.learn.visualstanfordcorenlpgrammartree.GrammarTreeFrame.GrammarNode;
-
 public class Main {
 	private Main() {
 	}

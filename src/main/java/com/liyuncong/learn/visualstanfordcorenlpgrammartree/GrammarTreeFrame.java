@@ -33,88 +33,8 @@ public class GrammarTreeFrame extends JFrame {
 		});
 	}
 	
-	public static class GrammarNode {
-		private String text;
-		private List<GrammarNode> children = new LinkedList<>();
-		public void addChild(GrammarNode child) {
-			assert child != null;
-			children.add(child);
-		}
-		public String getText() {
-			return text;
-		}
-		public void setText(String text) {
-			this.text = text;
-		}
-		public List<GrammarNode> getChildren() {
-			return children;
-		}
-		public void setChildren(List<GrammarNode> children) {
-			this.children = children;
-		}
-		/**
-		 * 
-		 * @param StanfordTreeString 
-		 * @return
-		 */
-		public static GrammarNode parseStanfordTreeString(String stanfordTreeString) {
-			int end = stanfordTreeString.indexOf('(', 1);
-			GrammarNode grammarNode = new GrammarNode();
-			if (end == -1) {
-				grammarNode.setText(stanfordTreeString.substring(1, stanfordTreeString.length() - 1));
-			} else {
-				grammarNode.setText(stanfordTreeString.substring(1, end).trim());
-				String childrenText = stanfordTreeString.substring(end, stanfordTreeString.length() -1);
-				LinkedList<Integer> stack = new LinkedList<>();
-				for(int i = 0; i < childrenText.length(); i++) {
-					if (childrenText.charAt(i) == '(') {
-						stack.push(i);
-					} else if (childrenText.charAt(i) == ')') {
-						Integer start = stack.pop();
-						if (stack.isEmpty()) {
-							grammarNode.addChild(parseStanfordTreeString(childrenText.substring(start, i + 1)));
-						}
-					}
-				}
-			}
-			return grammarNode;
-		}
-		@Override
-		public String toString() {
-			return "GrammarNode [text=" + text + ", children=" + children + "]";
-		}
-	}
-	
-	private static class GrammarNodeWithPosition {
-		private GrammarNode grammarNode;
-		private int x;
-		private int y;
-		public GrammarNode getGrammarNode() {
-			return grammarNode;
-		}
-		public void setGrammarNode(GrammarNode grammarNode) {
-			this.grammarNode = grammarNode;
-		}
-		public int getX() {
-			return x;
-		}
-		public void setX(int x) {
-			this.x = x;
-		}
-		public int getY() {
-			return y;
-		}
-		public void setY(int y) {
-			this.y = y;
-		}
-		@Override
-		public String toString() {
-			return "GrammarNodeWithPosition [grammarNode=" + grammarNode + ", x=" + x + ", y=" + y + "]";
-		}
-		
-	}
-	
 	public static class GrammarNodeComponent extends JComponent {
+		private static final long serialVersionUID = -6615204568407054807L;
 		private GrammarNode root;
 		private Map<Integer, List<GrammarNodeWithPosition>> levelAndGrammarNode = new HashMap<>();
 		
@@ -124,6 +44,11 @@ public class GrammarTreeFrame extends JFrame {
 			levelAndGrammarNode = hierarchicalTraversal(root);
 		}
 
+		/**
+		 * 层次遍历语法树，并把每个节点包装为GrammarNodeWithPosition
+		 * @param root
+		 * @return 键为层好（从1开始）值为对应层的所有节点
+		 */
 		private static Map<Integer, List<GrammarNodeWithPosition>> hierarchicalTraversal(GrammarNode root) {
 			Map<Integer, List<GrammarNodeWithPosition>> levelAndGrammarNode = new HashMap<>();
 			GrammarNodeWithPosition sentinel = new GrammarNodeWithPosition();
@@ -201,11 +126,6 @@ public class GrammarTreeFrame extends JFrame {
 			return x;
 		}
 		
-	}
-	
-	private static class Constants {
-		public static final int CHAR_WIDTH = 10;
-		public static final int CHAR_HEIGHT = 10;
 	}
 	
 }
