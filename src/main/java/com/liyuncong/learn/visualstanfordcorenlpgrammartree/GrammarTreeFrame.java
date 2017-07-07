@@ -33,7 +33,7 @@ public class GrammarTreeFrame extends JFrame {
 		});
 	}
 	
-	public static class GrammarNodeComponent extends JComponent {
+	private static class GrammarNodeComponent extends JComponent {
 		private static final long serialVersionUID = -6615204568407054807L;
 		private GrammarNode root;
 		private Map<Integer, List<GrammarNodeWithPosition>> levelAndGrammarNode = new HashMap<>();
@@ -128,4 +128,36 @@ public class GrammarTreeFrame extends JFrame {
 		
 	}
 	
+	/**
+	 * 包装GrammarNode，包装之后的对象包含GrammarNode在Frame中的位置
+	 * @author liyuncong
+	 *
+	 */
+	private static class GrammarNodeWithPosition {
+		private GrammarNode grammarNode;
+		private int x;
+		private int y;
+		public GrammarNode getGrammarNode() {
+			return grammarNode;
+		}
+		public void setGrammarNode(GrammarNode grammarNode) {
+			this.grammarNode = grammarNode;
+		}
+		public int getX() {
+			return x;
+		}
+		public void setX(int x) {
+			this.x = x;
+		}
+		public int getY() {
+			return y;
+		}
+		public void setY(int y) {
+			this.y = y;
+		}
+		@Override
+		public String toString() {
+			return "GrammarNodeWithPosition [grammarNode=" + grammarNode + ", x=" + x + ", y=" + y + "]";
+		}
+	}
 }
